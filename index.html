@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Routine — Faculty of Law and Land Administration, PSTU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a;
+    --parchment:#f7f2e7;
+    --parchment-deep:#efe6d3;
+    --navy:#1c2b45;
+    --maroon:#7c1f2b;
+    --maroon-deep:#5e161f;
+    --gold:#a9822f;
+    --gold-soft:#dcc078;
+    --line: rgba(33,29,26,0.16);
+    --today-bg: #fbf3e1;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(124,31,43,0.05), transparent 40%),
+      radial-gradient(circle at 90% 0%, rgba(28,43,69,0.06), transparent 45%);
+    color:var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{animation: rise .7s ease both;}
+    .reveal:nth-child(2){animation-delay:.08s;}
+    .reveal:nth-child(3){animation-delay:.16s;}
+  }
+  @keyframes rise{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+  a{color:inherit;}
+
+  /* ===== Header / masthead ===== */
+  header.masthead{
+    position:relative;
+    padding: 3.2rem 1.5rem 2.6rem;
+    text-align:center;
+    border-bottom:3px double var(--maroon);
+    background:
+      linear-gradient(180deg, rgba(28,43,69,0.03), transparent 60%);
+  }
+  .seal{
+    width:78px;height:78px;
+    margin:0 auto 1.1rem;
+    border-radius:50%;
+    border:2px solid var(--maroon);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    background:radial-gradient(circle, var(--parchment) 55%, var(--parchment-deep) 100%);
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+  }
+  .seal svg{width:34px;height:34px;fill:var(--maroon);}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color:var(--maroon-deep);
+    margin:0 0 .6rem;
+  }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(1.8rem, 4.2vw, 2.9rem);
+    line-height:1.12;
+    margin:.1rem 0 .4rem;
+    color:var(--navy);
+  }
+  .subtitle{
+    font-size:1rem;
+    color:#4b453d;
+    margin:.15rem 0;
+  }
+  .meta-row{
+    margin-top:1.1rem;
+    display:flex;
+    gap:.6rem;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.03em;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:.35rem .85rem;
+    color:var(--navy);
+    background:rgba(255,255,255,0.5);
+  }
+  .pill strong{color:var(--maroon);}
+
+  /* ===== Today ribbon (signature element) ===== */
+  .today-wrap{
+    max-width:900px;
+    margin: -1.4rem auto 0;
+    padding: 0 1.5rem;
+    position:relative;
+    z-index:2;
+  }
+  .today-card{
+    background:var(--navy);
+    color:var(--parchment);
+    border-radius:14px;
+    padding:1.3rem 1.5rem;
+    box-shadow:0 14px 34px -14px rgba(28,43,69,0.55);
+    display:flex;
+    gap:1.1rem;
+    align-items:center;
+  }
+  .today-stamp{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:.78rem;
+    color:var(--gold-soft);
+    border:1px solid var(--gold-soft);
+    border-radius:8px;
+    padding:.5rem .6rem;
+    text-align:center;
+    line-height:1.15;
+    white-space:nowrap;
+  }
+  .today-body{flex:1; min-width:0;}
+  .today-day{
+    font-family:'Fraunces', serif;
+    font-size:1.25rem;
+    margin:0 0 .3rem;
+  }
+  .today-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem .6rem;
+    font-size:.86rem;
+    color:#e6e2d6;
+  }
+  .today-list span.chip{
+    background:rgba(255,255,255,0.09);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:7px;
+    padding:.22rem .55rem;
+  }
+  .today-none{color:#c9c3b4; font-style:italic; font-size:.9rem;}
+
+  /* ===== Section wrapper ===== */
+  main{max-width:1080px; margin:0 auto; padding: 2.6rem 1.5rem 4rem;}
+  section{margin-bottom:2.6rem;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:.7rem;
+    margin-bottom:1rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:.5rem;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--gold);
+    font-size:.8rem;
+  }
+  h2{
+    font-family:'Fraunces', serif;
+    font-size:1.35rem;
+    margin:0;
+    color:var(--navy);
+  }
+
+  /* ===== Desktop timetable ===== */
+  .routine-table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,0.55);
+  }
+  table.routine{
+    width:100%;
+    border-collapse:collapse;
+    min-width:920px;
+    font-size:.86rem;
+  }
+  table.routine th, table.routine td{
+    border:1px solid var(--line);
+    padding:.6rem .55rem;
+    text-align:center;
+    vertical-align:middle;
+  }
+  table.routine thead th{
+    background:var(--navy);
+    color:var(--parchment);
+    font-family:'JetBrains Mono', monospace;
+    font-weight:500;
+    font-size:.72rem;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  table.routine thead th:first-child{border-top-left-radius:10px;}
+  table.routine thead th:last-child{border-top-right-radius:10px;}
+  table.routine tbody th{
+    background:var(--parchment-deep);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  table.routine td.empty{color:#b9b2a2;}
+  table.routine td.break-cell{
+    background:repeating-linear-gradient(135deg, rgba(124,31,43,0.06), rgba(124,31,43,0.06) 6px, rgba(124,31,43,0.02) 6px, rgba(124,31,43,0.02) 12px);
+    font-family:'JetBrains Mono', monospace;
+    font-size:.68rem;
+    color:var(--maroon-deep);
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+  }
+  .course-tag{
+    display:inline-block;
+    font-weight:700;
+    color:var(--maroon-deep);
+  }
+  .course-sub{
+    display:block;
+    font-size:.72rem;
+    color:#5c564c;
+    margin-top:.1rem;
+  }
+  tr.is-today{background:var(--today-bg);}
+  tr.is-today th{background:var(--gold-soft);}
+
+  /* ===== Mobile day cards ===== */
+  .day-cards{display:none;}
+  .day-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,0.6);
+    margin-bottom:.9rem;
+    overflow:hidden;
+  }
+  .day-card.is-today{outline:2px solid var(--gold);}
+  .day-card-head{
+    background:var(--navy);
+    color:var(--parchment);
+    padding:.55rem .9rem;
+    font-family:'Fraunces', serif;
+    font-size:1.02rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .day-card-head .count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.68rem;
+    color:var(--gold-soft);
+  }
+  .day-card-body{padding:.7rem .9rem;}
+  .slot-row{
+    display:flex;
+    justify-content:space-between;
+    gap:.8rem;
+    padding:.45rem 0;
+    border-bottom:1px dashed var(--line);
+    font-size:.88rem;
+  }
+  .slot-row:last-child{border-bottom:none;}
+  .slot-time{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.72rem;
+    color:#6b6357;
+    white-space:nowrap;
+    padding-top:.1rem;
+  }
+  .slot-course{text-align:right;}
+  .slot-empty{color:#b9b2a2; font-style:italic;}
+
+  @media (max-width: 760px){
+    .routine-table-wrap{display:none;}
+    .day-cards{display:block;}
+    .today-card{flex-direction:column; align-items:flex-start;}
+  }
+
+  /* ===== Course legend ===== */
+  .legend-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap:.7rem;
+  }
+  .legend-card{
+    border:1px solid var(--line);
+    border-left:4px solid var(--maroon);
+    background:rgba(255,255,255,0.55);
+    border-radius:8px;
+    padding:.75rem .9rem;
+  }
+  .legend-code{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.7rem;
+    color:var(--gold);
+  }
+  .legend-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1rem;
+    margin:.15rem 0 .3rem;
+    color:var(--navy);
+  }
+  .legend-meta{
+    font-size:.78rem;
+    color:#5c564c;
+    display:flex;
+    justify-content:space-between;
+  }
+  .total-row{
+    margin-top:.9rem;
+    text-align:right;
+    font-family:'JetBrains Mono', monospace;
+    font-size:.85rem;
+    color:var(--maroon-deep);
+  }
+
+  /* ===== Teachers ===== */
+  .teacher-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap:.6rem .9rem;
+  }
+  .teacher-item{
+    display:flex;
+    gap:.6rem;
+    align-items:baseline;
+    padding:.4rem 0;
+    border-bottom:1px solid var(--line);
+    font-size:.87rem;
+  }
+  .teacher-initial{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    color:var(--maroon);
+    min-width:2.6rem;
+  }
+
+  footer{
+    text-align:center;
+    padding: 2rem 1.5rem 3rem;
+    font-size:.78rem;
+    color:#7a7364;
+    border-top:1px solid var(--line);
+  }
+  footer .sig{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--navy);
+    display:block;
+    margin-bottom:.3rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="seal">
+    <svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4zm0 2.2 7 3.1v4.7c0 4-3.2 6.9-7 8.1-3.8-1.2-7-4.1-7-8.1V7.3l7-3.1zM8 12l3 3 5-5-1.4-1.4L11 12.2 9.4 10.6 8 12z"/></svg>
+  </div>
+  <p class="eyebrow">Patuakhali Science and Technology University</p>
+  <h1 class="title">Faculty of Law and Land Administration</h1>
+  <p class="subtitle">1st Semester Class Routine — January&ndash;June / 2026</p>
+  <div class="meta-row">
+    <span class="pill">Effective from <strong>30/07/2026</strong></span>
+    <span class="pill">Total credit hours <strong>18.5</strong></span>
+    <span class="pill">Dumki, Patuakhali&ndash;8660</span>
+  </div>
+</header>
+
+<div class="today-wrap reveal">
+  <div class="today-card" id="todayCard">
+    <div class="today-stamp">Today's<br>Schedule</div>
+    <div class="today-body">
+      <p class="today-day" id="todayDayName">—</p>
+      <div class="today-list" id="todayList"></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section id="week" class="reveal">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Weekly Timetable</h2>
+    </div>
+
+    <div class="routine-table-wrap">
+      <table class="routine" id="routineTable">
+        <thead>
+          <tr>
+            <th>Day / Time</th>
+            <th>08:00–08:55</th>
+            <th>09:00–09:55</th>
+            <th>10:00–10:55</th>
+            <th>11:00–11:55</th>
+            <th>12:00–12:55</th>
+            <th>1:00–2:25</th>
+            <th>02:30–03:25</th>
+            <th>03:30–04:25</th>
+          </tr>
+        </thead>
+        <tbody id="routineBody"></tbody>
+      </table>
+    </div>
+
+    <div class="day-cards" id="dayCards"></div>
+  </section>
+
+  <section id="courses" class="reveal">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Course Legend</h2>
+    </div>
+    <div class="legend-grid" id="legendGrid"></div>
+    <p class="total-row">Total course load — 18.5 credit hours</p>
+  </section>
+
+  <section id="teachers" class="reveal">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Course Teachers</h2>
+    </div>
+    <div class="teacher-grid" id="teacherGrid"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="sig">Professor Dr. S. M. Hemayet Jahan</span>
+  Dean, Faculty of Law and Land Administration · Patuakhali Science and Technology University
+</footer>
+
+<script>
+const SLOTS = ["08:00–08:55","09:00–09:55","10:00–10:55","11:00–11:55","12:00–12:55","BREAK","02:30–03:25","03:30–04:25"];
+
+// course code -> {title, room, teacherKey}
+const COURSES = {
+  ECO111: {code:"0311ECO 111", title:"Fundamentals of Economics", room:"401", teacher:"MH/SKS"},
+  LCM111: {code:"0231LCM 111", title:"Communicative English", room:"401", teacher:"SJ"},
+  CIT111: {code:"0611CIT 111", title:"Fundamentals of Computer Science and IT", room:"402", teacher:"MR/MTS"},
+  CIT112: {code:"0611CIT 112", title:"Fundamentals of Computer Science and IT", room:"402", teacher:"MR/MTS"},
+  LLA111: {code:"0421LLA 111", title:"Jurisprudence", room:"401", teacher:"AR/MRS"},
+  LLA112: {code:"0421LLA 112", title:"Legal History of Bangladesh", room:"401", teacher:"MRI/AS"},
+  LLA113: {code:"0421LLA 113", title:"Muslim Law", room:"401", teacher:"MRS/SBA"},
+  LLA114: {code:"0421LLA 114", title:"Jurisprudence Sessional", room:"401", teacher:"AR"},
+};
+
+// Weekly grid: null = free, "BREAK" handled separately, else course key
+const ROUTINE = {
+  Sunday:    [null, null, "LLA113", "LLA113", null, "BREAK", null, null],
+  Monday:    ["ECO111","ECO111","ECO111","LLA112","LLA112","BREAK", null, null],
+  Tuesday:   ["LCM111","LCM111","LCM111","LLA111","LLA111","BREAK", null, null],
+  Wednesday: [null, null, null, null, null, "BREAK", "LLA113","LLA112"],
+  Thursday:  [null, "CIT111","CIT111","CIT112", null, "BREAK", "LLA114","LLA111"],
+};
+
+const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday"];
+
+const TEACHERS = [
+  ["MH","Professor Md. Maqbul Hassain"],
+  ["SKS","Professor Dr. Md. Sujahangir Kabir Sarkar"],
+  ["AR","Md. Abdur Rahim"],
+  ["MR","Md. Mahbubur Rahman"],
+  ["MRI","Md. Rezaul Islam"],
+  ["MRS","Md. Rahmat Sarker"],
+  ["SBA","Shoud Bin Alam"],
+  ["SJ","Sultana Jahan"],
+  ["AS","Amina Sarwar"],
+  ["MTS","Muhtasim"],
+];
+
+function courseCell(key){
+  if(!key) return '<td class="empty">—</td>';
+  const c = COURSES[key];
+  return `<td><span class="course-tag">${key.replace(/(\D+)(\d+)/,"$1 $2")}</span><span class="course-sub">${c.teacher} · Rm ${c.room}</span></td>`;
+}
+
+// Build desktop table
+const tbody = document.getElementById('routineBody');
+const todayIdx = new Date().getDay(); // 0=Sun..6=Sat
+DAYS.forEach((day, i) => {
+  const row = ROUTINE[day];
+  const isToday = i === todayIdx;
+  let html = `<tr class="${isToday ? 'is-today' : ''}"><th>${day}</th>`;
+  row.forEach((key) => {
+    if(key === "BREAK"){
+      html += '<td class="break-cell" rowspan="1">1:00–2:25 Break</td>';
+    } else {
+      html += courseCell(key);
+    }
+  });
+  html += `</tr>`;
+  tbody.insertAdjacentHTML('beforeend', html);
+});
+
+// Build mobile cards
+const dayCards = document.getElementById('dayCards');
+DAYS.forEach((day, i) => {
+  const row = ROUTINE[day];
+  const isToday = i === todayIdx;
+  const classCount = row.filter(k => k && k !== "BREAK").length;
+  let body = '';
+  row.forEach((key, idx) => {
+    if(key === "BREAK") return;
+    const slotLabel = SLOTS[idx];
+    if(!key){
+      body += `<div class="slot-row"><span class="slot-time">${slotLabel}</span><span class="slot-course slot-empty">Free</span></div>`;
+    } else {
+      const c = COURSES[key];
+      body += `<div class="slot-row"><span class="slot-time">${slotLabel}</span><span class="slot-course"><strong>${key.replace(/(\D+)(\d+)/,"$1 $2")}</strong><br><span class="today-none" style="font-style:normal;color:#5c564c;">${c.teacher} · Room ${c.room}</span></span></div>`;
+    }
+  });
+  dayCards.insertAdjacentHTML('beforeend', `
+    <div class="day-card ${isToday ? 'is-today' : ''}">
+      <div class="day-card-head"><span>${day}</span><span class="count">${classCount} class${classCount===1?'':'es'}</span></div>
+      <div class="day-card-body">${body}</div>
+    </div>
+  `);
+});
+
+// Today ribbon
+const todayNameEl = document.getElementById('todayDayName');
+const todayListEl = document.getElementById('todayList');
+if(DAYS.includes(DAYS[todayIdx]) && ROUTINE[DAYS[todayIdx]]){
+  const day = DAYS[todayIdx];
+  const row = ROUTINE[day];
+  const now = new Date();
+  todayNameEl.textContent = day + " · " + now.toLocaleDateString(undefined, {month:'long', day:'numeric', year:'numeric'});
+  const items = row.filter(k => k && k !== "BREAK");
+  if(items.length === 0){
+    todayListEl.innerHTML = '<span class="today-none">No classes scheduled today.</span>';
+  } else {
+    todayListEl.innerHTML = [...new Set(items)].map(k => {
+      const c = COURSES[k];
+      return `<span class="chip">${k.replace(/(\D+)(\d+)/,"$1 $2")} — ${c.title}</span>`;
+    }).join('');
+  }
+} else {
+  todayNameEl.textContent = "No classes today";
+  todayListEl.innerHTML = '<span class="today-none">Enjoy the weekend.</span>';
+}
+
+// Course legend
+const legendGrid = document.getElementById('legendGrid');
+const LEGEND_ORDER = [
+  ["LLA111", 3, "Main"],
+  ["LLA112", 3, "Main"],
+  ["LLA113", 3, "Main"],
+  ["ECO111", 3, "Out"],
+  ["CIT111", 2, "Out"],
+  ["CIT112", 1, ""],
+  ["LCM111", 3, "Out"],
+  ["LLA114", 0.5, ""],
+];
+LEGEND_ORDER.forEach(([key, hours, tag]) => {
+  const c = COURSES[key];
+  legendGrid.insertAdjacentHTML('beforeend', `
+    <div class="legend-card">
+      <div class="legend-code">${c.code}</div>
+      <div class="legend-title">${c.title}</div>
+      <div class="legend-meta"><span>Teacher: ${c.teacher}</span><span>${hours} cr${tag ? ' · '+tag : ''}</span></div>
+    </div>
+  `);
+});
+
+// Teachers
+const teacherGrid = document.getElementById('teacherGrid');
+TEACHERS.forEach(([abbr, name]) => {
+  teacherGrid.insertAdjacentHTML('beforeend', `<div class="teacher-item"><span class="teacher-initial">${abbr}</span><span>${name}</span></div>`);
+});
+</script>
+
+</body>
+</html>
